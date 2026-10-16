@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Social Engineering Target Profiling Framework</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAFAFA;
+    --surface: #FFFFFF;
+    --ink: #1C1B2E;
+    --muted: #6B6A82;
+    --indigo: #22205A;
+    --indigo-mid: #4845A8;
+    --amber: #D97B2A;
+    --teal: #1A9968;
+    --hairline: #E3E2EA;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mono { font-family: 'IBM Plex Mono', 'Courier New', monospace; }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+
+  /* ---------- Header ---------- */
+  .doc-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-size: 36px;
+    line-height: 1.15;
+    font-weight: 700;
+    color: var(--indigo);
+    margin: 0 0 14px;
+    max-width: 14ch;
+  }
+
+  .deck {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 58ch;
+    margin: 0 0 8px;
+  }
+
+  .byline {
+    font-size: 13.5px;
+    color: var(--muted);
+    margin-top: 18px;
+  }
+
+  .byline a { color: var(--indigo-mid); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+  /* ---------- Scope callout ---------- */
+  .callout {
+    margin: 40px 0;
+    padding: 18px 20px;
+    border: 1px solid var(--amber);
+    border-left: 3px solid var(--amber);
+    background: #FFF8F1;
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .callout strong { color: var(--amber); }
+
+  /* ---------- Diagram ---------- */
+  .diagram {
+    margin: 48px 0;
+  }
+  .diagram img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .diagram-caption {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  /* ---------- Section rhythm ---------- */
+  section {
+    margin-top: 64px;
+  }
+
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--indigo);
+    margin: 0 0 18px;
+  }
+
+  p { font-size: 15.5px; line-height: 1.65; margin: 0 0 14px; color: var(--ink); }
+
+  hr.rule {
+    border: none;
+    border-top: 1px solid var(--hairline);
+    margin: 56px 0 0;
+  }
+
+  /* ---------- Stage blocks ---------- */
+  .stage {
+    border-left: 3px solid var(--stage-color, var(--indigo));
+    padding-left: 22px;
+    margin-bottom: 40px;
+  }
+  .stage-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--stage-color, var(--indigo));
+    margin-bottom: 4px;
+  }
+  .stage h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: var(--ink);
+  }
+
+  .stage-1 { --stage-color: #22205A; }
+  .stage-2 { --stage-color: #4845A8; }
+  .stage-3 { --stage-color: #D97B2A; }
+  .stage-4 { --stage-color: #1A9968; }
+  .stage-5 { --stage-color: #22205A; }
+
+  /* ---------- Tables ---------- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 8px;
+    font-size: 14px;
+  }
+  th, td {
+    text-align: left;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+  th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  td { color: var(--ink); }
+  td.key, td.lever {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* ---------- Worked example card ---------- */
+  .case-file {
+    border: 1px dashed var(--indigo-mid);
+    padding: 28px 24px;
+    margin-top: 20px;
+    background: var(--surface);
+  }
+  .case-stamp {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--indigo-mid);
+    border: 1px solid var(--indigo-mid);
+    padding: 3px 9px;
+    margin-bottom: 16px;
+  }
+  .case-file h3 {
+    font-size: 16px;
+    color: var(--indigo);
+    margin: 28px 0 8px;
+  }
+  .case-file h3:first-of-type { margin-top: 0; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--hairline);
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 560px) {
+    h1 { font-size: 28px; }
+    .wrap { padding: 40px 18px 72px; }
+    th, td { padding: 8px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="doc-meta mono">Methodology reference · authorized engagements and instruction only</div>
+  <h1>Social Engineering Target Profiling Framework</h1>
+  <p class="deck">A structured way to run OSINT-driven target profiling before a social engineering engagement — mapping MICE and RASCLS to campaign design in GoPhish, instead of starting from a generic template.</p>
+  <div class="byline">Frank Stevens — CNM Cybersecurity Faculty / ChannelXZero · <a href="#">Source on GitHub</a></div>
+
+  <div class="callout">
+    <strong>Scope.</strong> This page documents a methodology, not an attack toolkit. It assumes written authorization and a defined scope exist before any OSINT collection or campaign build begins, and that no campaign is launched without that authorization. The worked example further down uses entirely fictional data.
+  </div>
+
+  <div class="diagram">
+    <img src="framework-diagram.svg" alt="Five-stage framework diagram: OSINT Recon, Psychological Profiling, Pretext and Message Design, GoPhish Campaign Build, Defensive Mapping">
+    <div class="diagram-caption">The five stages form a loop — Stage 5 findings feed the next profiling cycle rather than ending the process.</div>
+  </div>
+
+  <section>
+    <h2>Why profile before building a campaign</h2>
+    <p>Most phishing simulations skip straight to a template. A real attacker researches the target first, picks the psychological lever most likely to work on that specific person, and only then writes the email. Skipping the research step is why generic simulations underperform real attacks — and why they teach organizations less about their actual risk.</p>
+  </section>
+
+  <section>
+    <h2>The five stages</h2>
+
+    <div class="stage stage-1">
+      <div class="stage-num mono">Stage 1</div>
+      <h3>OSINT Recon</h3>
+      <p>Collect information about the target within authorized scope: role and tenure, organizational structure, technology stack, and any recent public events relevant to the organization.</p>
+      <table>
+        <tr><th>Source</th><th>What it reveals</th></tr>
+        <tr><td class="key">LinkedIn / org chart</td><td>Role, tenure, reporting line, recent changes</td></tr>
+        <tr><td class="key">Company site / press</td><td>Org structure, recent initiatives, vendors</td></tr>
+        <tr><td class="key">theHarvester, Shodan</td><td>Email format, exposed infrastructure</td></tr>
+        <tr><td class="key">Public records / news</td><td>Mergers, layoffs, leadership changes</td></tr>
+      </table>
+    </div>
+
+    <div class="stage stage-2">
+      <div class="stage-num mono">Stage 2</div>
+      <h3>Psychological Profiling — MICE + RASCLS</h3>
+      <p>Score the target brief against both models and keep only the 1–2 levers that genuinely fit. A campaign built around the wrong lever underperforms even with strong technical execution.</p>
+      <table>
+        <tr><th>MICE lever</th><th>Fits when...</th></tr>
+        <tr><td class="lever">Manipulation</td><td>Role carries compliance/deadline pressure</td></tr>
+        <tr><td class="lever">Ingratiation</td><td>Target has a visible, approachable presence</td></tr>
+        <tr><td class="lever">Commitment</td><td>Target recently took a public action</td></tr>
+        <tr><td class="lever">Ego</td><td>Target holds a senior title or recent recognition</td></tr>
+      </table>
+      <table>
+        <tr><th>RASCLS principle</th><th>Fits when...</th></tr>
+        <tr><td class="lever">Reciprocity</td><td>A prior favor can plausibly be referenced</td></tr>
+        <tr><td class="lever">Authority</td><td>Impersonating IT, legal, or leadership works</td></tr>
+        <tr><td class="lever">Scarcity</td><td>Role is deadline-driven (finance close, enrollment)</td></tr>
+        <tr><td class="lever">Liking</td><td>An internal team identity can be mimicked</td></tr>
+        <tr><td class="lever">Social Proof</td><td>Rollout/adoption framing fits the context</td></tr>
+      </table>
+    </div>
+
+    <div class="stage stage-3">
+      <div class="stage-num mono">Stage 3</div>
+      <h3>Pretext &amp; Message Design</h3>
+      <p>Translate the chosen lever(s) into a scenario: what the sender claims to be, a subject line that signals the lever directly, a sender identity the target would plausibly trust, and a single clear call to action. Document why the design maps to the Stage 2 lever — that justification is what the exercise is graded on.</p>
+    </div>
+
+    <div class="stage stage-4">
+      <div class="stage-num mono">Stage 4</div>
+      <h3>GoPhish Campaign Build — configuration only</h3>
+      <p>Translate the Stage 3 design into GoPhish objects: email template, landing page, sending profile. In a classroom or portfolio context this stage stops at configuration and screenshots — nothing is launched without explicit written authorization.</p>
+    </div>
+
+    <div class="stage stage-5">
+      <div class="stage-num mono">Stage 5</div>
+      <h3>Defensive Mapping</h3>
+      <p>For every lever used, document the matching technical and organizational control. This is what turns the exercise into a training recommendation specific to the target, rather than a generic phishing-awareness slide.</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h2>Worked example</h2>
+    <p>A fully synthetic walkthrough, included to show the framework's output format rather than real reconnaissance.</p>
+
+    <div class="case-file">
+      <span class="case-stamp">SYNTHETIC DATA — NOT A REAL TARGET</span>
+
+      <h3>Target brief</h3>
+      <table>
+        <tr><td class="key">Name</td><td>Jane Doe (fictional)</td></tr>
+        <tr><td class="key">Title</td><td>Finance Manager, Accounts Payable</td></tr>
+        <tr><td class="key">Organization</td><td>FicCorp Industries (fictional)</td></tr>
+        <tr><td class="key">Tenure</td><td>14 months — recently promoted</td></tr>
+        <tr><td class="key">Signal</td><td>LinkedIn post on Q3 close; named in a vendor-onboarding press release</td></tr>
+      </table>
+
+      <h3>Lever selection</h3>
+      <table>
+        <tr><th>Model</th><th>Lever</th><th>Why</th></tr>
+        <tr><td class="lever">MICE</td><td class="key">Ego</td><td>Recent promotion + recognition</td></tr>
+        <tr><td class="lever">RASCLS</td><td class="key">Scarcity + Authority</td><td>AP workflow is deadline-driven</td></tr>
+      </table>
+
+      <h3>Pretext</h3>
+      <p>Email appears to come from the CFO's office, referencing the vendor-onboarding initiative she was named in, asking her to confirm updated banking details before a stated cutoff. Subject: <span class="mono">"Vendor Banking Update — Confirm Before EOD Friday"</span>.</p>
+
+      <h3>Defensive mapping</h3>
+      <table>
+        <tr><th>Lever used</th><th>Technical control</th><th>Organizational control</th></tr>
+        <tr><td class="lever">Authority</td><td>DMARC/SPF/DKIM enforcement</td><td>Banking changes verified by phone, not email</td></tr>
+        <tr><td class="lever">Scarcity</td><td>Gateway flags urgency language</td><td>Targeted AP-staff training</td></tr>
+        <tr><td class="lever">Ego</td><td>—</td><td>Awareness: public recognition raises targeting risk</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h2>Mapping to standards</h2>
+    <p>This framework sits alongside existing standards rather than replacing them. It operationalizes the Intelligence Gathering and part of the Threat Modeling phases of <strong>PTES</strong>, specifically for the social engineering vector. Stages 1–2 map to <strong>MITRE ATT&amp;CK</strong> Reconnaissance (T1589–T1598) and Stage 4 to Initial Access (T1566, Phishing). Stage 5 outputs map to the Protect function of the <strong>NIST CSF</strong>.</p>
+  </section>
+
+  <footer>
+    This methodology document is free to reference and adapt for authorized security engagements and educational use. It does not grant authorization to conduct any engagement — authorization must come from the target organization's own scope documentation.<br><br>
+    Maintained by Frank Stevens — CNM Cybersecurity Faculty / ChannelXZero
+  </footer>
+
+</div>
+</body>
+</html>
