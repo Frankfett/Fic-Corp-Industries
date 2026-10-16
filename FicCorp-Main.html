@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FicCorp Industries (fictional) — Framework Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAFAFA; --surface: #FFFFFF; --ink: #1C1B2E; --muted: #6B6A82;
+    --indigo: #22205A; --indigo-mid: #4845A8; --amber: #D97B2A; --teal: #1A9968;
+    --hairline: #E3E2EA;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background: var(--paper); color: var(--ink); font-family:'IBM Plex Sans', Arial, sans-serif; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+
+  .stamp-bar {
+    background: var(--amber); color: #FFF; font-family:'IBM Plex Mono', monospace;
+    font-size: 12.5px; text-align: center; padding: 8px 12px; letter-spacing: 0.02em;
+  }
+  .stamp-bar a { color: #FFF; }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 920px; margin: 0 auto; padding: 24px 24px 0;
+  }
+  .brand { font-weight: 700; font-size: 17px; color: var(--indigo); }
+  .brand span { color: var(--indigo-mid); }
+  .navlinks { font-size: 13.5px; }
+  .navlinks a { color: var(--muted); text-decoration: none; margin-left: 20px; }
+  .navlinks a:hover { color: var(--indigo); }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px 96px; }
+
+  .hero { padding: 56px 0 40px; border-bottom: 1px solid var(--hairline); margin-bottom: 40px; }
+  .eyebrow { font-family:'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--teal); margin-bottom: 12px; }
+  h1 { font-size: 34px; line-height: 1.2; color: var(--indigo); margin: 0 0 16px; max-width: 16ch; }
+  .lede { font-size: 16.5px; line-height: 1.6; color: var(--ink); max-width: 52ch; margin: 0; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+  .card { padding: 20px 0; border-top: 1px solid var(--hairline); }
+  .card h3 { font-size: 15.5px; color: var(--indigo); margin: 0 0 8px; }
+  .card p { font-size: 14px; color: var(--muted); line-height: 1.6; margin: 0; }
+
+  .press { margin-bottom: 48px; }
+  .press h2 { font-size: 19px; color: var(--indigo); margin-bottom: 16px; }
+  .press-item { padding: 16px 0; border-bottom: 1px solid var(--hairline); }
+  .press-date { font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); }
+  .press-item h4 { font-size: 15px; margin: 6px 0; color: var(--ink); }
+  .press-item p { font-size: 13.5px; color: var(--muted); line-height: 1.55; margin: 0; }
+
+  .team { margin-bottom: 48px; }
+  .team h2 { font-size: 19px; color: var(--indigo); margin-bottom: 16px; }
+  .team-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--hairline); font-size: 14px; align-items: baseline; }
+  .team-row .name { font-weight: 600; color: var(--ink); }
+  .team-row .role { color: var(--muted); font-size: 13px; }
+  .team-row a { color: var(--indigo-mid); text-decoration: none; font-size: 13px; }
+
+  footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairline); font-size: 12.5px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="stamp-bar mono">FICTIONAL COMPANY — FRAMEWORK DEMONSTRATION ONLY · <a href="index.html">Back to Framework</a></div>
+
+<nav>
+  <div class="brand">FicCorp <span>Industries</span></div>
+  <div class="navlinks mono">
+    <a href="#leadership">Leadership</a>
+    <a href="#press">Press</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow mono">Industrial Supply &amp; Logistics</div>
+    <h1>Supply chain infrastructure for a connected industry</h1>
+    <p class="lede">FicCorp Industries is a fictional mid-size logistics and vendor-management company, created as a demonstration target for the <a href="index.html">Social Engineering Target Profiling Framework</a>. Nothing on this page refers to a real organization.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>About</h3>
+      <p>Founded 2011. ~850 employees across three regional offices. Core business: vendor onboarding and logistics coordination for industrial clients.</p>
+    </div>
+    <div class="card">
+      <h3>Departments</h3>
+      <p>Finance &amp; Accounts Payable, Vendor Relations, IT &amp; Infrastructure, Operations, People &amp; Culture.</p>
+    </div>
+  </div>
+
+  <div class="press" id="press">
+    <h2>Newsroom</h2>
+    <div class="press-item">
+      <div class="press-date mono">Q3 2026</div>
+      <h4>FicCorp launches new vendor-onboarding initiative</h4>
+      <p>FicCorp announced a company-wide initiative to streamline vendor payment setup, led by the Accounts Payable team under newly-promoted Finance Manager Jane Doe.</p>
+    </div>
+    <div class="press-item">
+      <div class="press-date mono">Q2 2026</div>
+      <h4>FicCorp closes Q2 ahead of schedule</h4>
+      <p>The Finance team closed Q2 reporting a week ahead of the internal deadline, highlighted in an internal recognition post shared company-wide.</p>
+    </div>
+  </div>
+
+  <div class="team" id="leadership">
+    <h2>Leadership &amp; key contacts</h2>
+    <div class="team-row">
+      <div><span class="name">Jane Doe</span> <span class="role">— Finance Manager, Accounts Payable</span></div>
+      <a href="target.html">View profile</a>
+    </div>
+    <div class="team-row">
+      <div><span class="name">R. Alvarez</span> <span class="role">— Chief Financial Officer</span></div>
+    </div>
+    <div class="team-row">
+      <div><span class="name">S. Okafor</span> <span class="role">— VP, Vendor Relations</span></div>
+    </div>
+  </div>
+
+  <footer>
+    FicCorp Industries is a fictional entity used solely to demonstrate the OSINT-recon stage of the <a href="index.html" style="color:var(--indigo-mid)">Social Engineering Target Profiling Framework</a>. No real company, employee, or data is represented.
+  </footer>
+</div>
+
+</body>
+</html>
