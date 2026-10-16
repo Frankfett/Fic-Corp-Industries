@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Target Profile: Jane Doe (fictional) — Framework Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAFAFA; --surface: #FFFFFF; --ink: #1C1B2E; --muted: #6B6A82;
+    --indigo: #22205A; --indigo-mid: #4845A8; --amber: #D97B2A; --teal: #1A9968;
+    --hairline: #E3E2EA;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background: var(--paper); color: var(--ink); font-family:'IBM Plex Sans', Arial, sans-serif; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+
+  .stamp-bar {
+    background: var(--indigo-mid); color: #FFF; font-family:'IBM Plex Mono', monospace;
+    font-size: 12.5px; text-align: center; padding: 8px 12px; letter-spacing: 0.02em;
+  }
+  .stamp-bar a { color: #FFF; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 96px; }
+
+  .back { font-size: 13px; color: var(--muted); text-decoration: none; }
+
+  .case-stamp {
+    display: inline-block; font-family:'IBM Plex Mono', monospace; font-size: 11.5px;
+    letter-spacing: 0.04em; color: var(--indigo-mid); border: 1px solid var(--indigo-mid);
+    padding: 3px 9px; margin: 20px 0 16px;
+  }
+
+  h1 { font-size: 30px; color: var(--indigo); margin: 0 0 4px; }
+  .subtitle { font-size: 15px; color: var(--muted); margin-bottom: 28px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0 36px; font-size: 14px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  th { font-family:'IBM Plex Mono', monospace; font-weight: 500; font-size: 12px; color: var(--muted); width: 160px; }
+
+  h2 { font-size: 19px; color: var(--indigo); margin: 36px 0 14px; }
+
+  .finding { padding: 14px 0; border-bottom: 1px solid var(--hairline); }
+  .finding .src { font-family:'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--teal); margin-bottom: 4px; }
+  .finding p { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--ink); }
+
+  .lever-box { border: 1px solid var(--hairline); padding: 20px; margin-top: 8px; background: var(--surface); }
+  .lever-box table { margin: 0; }
+
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--hairline); font-size: 12.5px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="stamp-bar mono">SYNTHETIC TARGET — NOT A REAL PERSON · <a href="index.html">Back to Framework</a></div>
+
+<div class="wrap">
+  <a class="back" href="ficcorp.html">&larr; FicCorp Industries</a>
+  <div class="case-stamp mono">Stage 1 output — target brief</div>
+
+  <h1>Jane Doe</h1>
+  <div class="subtitle">Finance Manager, Accounts Payable — FicCorp Industries (fictional)</div>
+
+  <table>
+    <tr><th>Tenure</th><td>14 months — promoted from Senior AP Analyst in Q1 2026</td></tr>
+    <tr><th>Department</th><td>Finance &amp; Accounts Payable</td></tr>
+    <tr><th>Reports to</th><td>R. Alvarez, CFO</td></tr>
+    <tr><th>Public footprint</th><td>Moderate — LinkedIn profile active, no personal social accounts found in this exercise</td></tr>
+  </table>
+
+  <h2>OSINT findings</h2>
+
+  <div class="finding">
+    <div class="src mono">SOURCE: FicCorp newsroom</div>
+    <p>Named in the Q3 2026 press release announcing the vendor-onboarding initiative, which she was selected to lead following her promotion.</p>
+  </div>
+  <div class="finding">
+    <div class="src mono">SOURCE: LinkedIn (public post)</div>
+    <p>Posted congratulating her team on closing Q2 reporting ahead of the internal deadline — indicates she engages publicly with department milestones.</p>
+  </div>
+  <div class="finding">
+    <div class="src mono">SOURCE: Org chart / role pattern</div>
+    <p>AP roles routinely process invoice and vendor payment-change requests on recurring deadlines — a high-frequency, time-pressured workflow.</p>
+  </div>
+
+  <h2>Lever selection (Stage 2 output)</h2>
+  <div class="lever-box">
+    <table>
+      <tr><th>Model</th><td>MICE — Ego</td></tr>
+      <tr><th>Why</th><td>Recent promotion and public recognition suggest responsiveness to messages that acknowledge her new authority or visibility</td></tr>
+      <tr><th>Model</th><td>RASCLS — Scarcity + Authority</td></tr>
+      <tr><th>Why</th><td>AP workflow is inherently deadline-driven; a message appearing to come from leadership with a short window fits her daily pattern</td></tr>
+      <tr><th>Rejected</th><td>Liking (no personal social presence to mimic); Reciprocity (no prior favor to reference)</td></tr>
+    </table>
+  </div>
+
+  <footer>
+    "Jane Doe" and all details on this page are fictional, created to demonstrate Stage 1–2 of the <a href="index.html" style="color:var(--indigo-mid)">Social Engineering Target Profiling Framework</a>. See the <a href="osint-brief.html" style="color:var(--indigo-mid)">full OSINT brief</a> for the researcher's writeup.
+  </footer>
+</div>
+
+</body>
+</html>
